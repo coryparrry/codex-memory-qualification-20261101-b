@@ -9,3 +9,8 @@ export function addCents(left: number, right: number): number {
   }
   return result;
 }
+
+/** Subtract safe integer-cent amounts using the same validated ledger operation. */
+export function subtractCents(left: number, right: number): number {
+  return addCents(left, -right);
+}
