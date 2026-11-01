@@ -95,7 +95,8 @@ jobs:
           trigger_phrase: "/codex"
           openai_api_key: ${{ secrets.OPENAI_API_KEY }}
           codex_model: "gpt-6-luna"
-          max_turns: "60"
+          max_turns: "12"
+          max_budget_usd: "2.00"
           review_mode: "true"
           codex_sandbox: read-only
           prompt: |
@@ -121,3 +122,4 @@ jobs:
           name: codex-review-memory-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/codex-review-memory/${{ github.run_id }}-${{ github.run_attempt }}/candidate.json
           if-no-files-found: ignore
+            For this synthetic release qualification, inspect src/ledger.ts and propose its documented integer-cent invariant as repository_learning, scoped to src/ledger.ts. Keep the note reusable and concise. Do not invent a defect.
