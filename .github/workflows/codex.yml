@@ -42,7 +42,7 @@ jobs:
         with:
           fetch-depth: 0
       - id: agent
-        uses: coryparrry/claude-code-action@7e87c5fa66bc28f1cd03b601ed4198b4aa35d136
+        uses: coryparrry/claude-code-action@66b6da91cfaf5f82c03a029599c0dcc8ffc898be
         with:
           trigger_phrase: "/codex"
           openai_api_key: ${{ secrets.OPENAI_API_KEY }}
@@ -90,13 +90,12 @@ jobs:
         run: >-
           git diff --no-ext-diff --no-textconv "$CODEX_PR_BASE_SHA...$CODEX_PR_HEAD_SHA" -- > .git/codex-review.diff
       - id: agent
-        uses: coryparrry/claude-code-action@7e87c5fa66bc28f1cd03b601ed4198b4aa35d136
+        uses: coryparrry/claude-code-action@66b6da91cfaf5f82c03a029599c0dcc8ffc898be
         with:
           trigger_phrase: "/codex"
           openai_api_key: ${{ secrets.OPENAI_API_KEY }}
           codex_model: "gpt-6-luna"
-          max_turns: "12"
-          max_budget_usd: "2.00"
+          max_turns: "60"
           review_mode: "true"
           codex_sandbox: read-only
           prompt: |
@@ -105,7 +104,6 @@ jobs:
             Use the repository and PR context. Return actionable findings and a concise summary together.
             Propose candidate findings using the native review schema. A separate verifier checks them before publication. Only new, high-confidence patch defects receive inline comments; remembered findings stay in their existing threads. Do not create severity-specific reviews or a combined findings comment.
             Do not edit files, commit changes or implement fixes during this review.
-            For this synthetic release qualification, inspect src/ledger.ts and propose its documented integer-cent invariant as repository_learning, scoped to src/ledger.ts. Keep the note reusable and concise. Do not invent a defect.
             The author can request an implementation in a comment with /codex.
       - name: Save execution report
         if: ${{ always() && steps.agent.outputs.execution_file != '' }}
