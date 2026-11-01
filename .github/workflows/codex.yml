@@ -105,6 +105,7 @@ jobs:
             Use the repository and PR context. Return actionable findings and a concise summary together.
             Propose candidate findings using the native review schema. A separate verifier checks them before publication. Only new, high-confidence patch defects receive inline comments; remembered findings stay in their existing threads. Do not create severity-specific reviews or a combined findings comment.
             Do not edit files, commit changes or implement fixes during this review.
+            For this synthetic release qualification, inspect src/ledger.ts and propose its documented integer-cent invariant as repository_learning, scoped to src/ledger.ts. Keep the note reusable and concise. Do not invent a defect.
             The author can request an implementation in a comment with /codex.
       - name: Save execution report
         if: ${{ always() && steps.agent.outputs.execution_file != '' }}
@@ -122,4 +123,3 @@ jobs:
           name: codex-review-memory-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/codex-review-memory/${{ github.run_id }}-${{ github.run_attempt }}/candidate.json
           if-no-files-found: ignore
-            For this synthetic release qualification, inspect src/ledger.ts and propose its documented integer-cent invariant as repository_learning, scoped to src/ledger.ts. Keep the note reusable and concise. Do not invent a defect.
